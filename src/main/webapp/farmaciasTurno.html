@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Farmacias de Turno</title>
+    <meta charset="UTF-8">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script>
+		$(document).ready(function () {
+
+			//$("#btnSubmit").click(function (event) {
+
+				//stop submit the form, we will post it manually.
+				event.preventDefault();
+
+				// Get form
+				var form = $('#hiddenParam')[0];
+				
+				// Create an FormData object
+				var data = new FormData(form);
+
+				// If you want to add an extra field for the FormData
+				data.append("CustomField", "This is some extra data, testing");
+
+				$.ajax({
+					type: "POST",
+					enctype: 'application/x-www-form-urlencoded',
+					url: "https://midastest.minsal.cl/farmacias/maps/index.php/utilidades/maps_obtener_comunas_por_regiones",
+					data: data,
+					processData: false,
+					contentType: false,
+					cache: false,
+					timeout: 600000,
+					success: function (data) {
+
+						$("#communeList").append(data);
+						console.log("SUCCESS : ", data);
+
+					},
+					error: function (e) {
+
+						$("#communeList").text(e.responseText);
+						console.log("ERROR : ", e);
+
+					}
+				});
+			
+			$( "#communeList" ).change(function() {
+				$("#commune").val($( "#communeList option:selected" ).text());
+			});
+		});
+	</script>
+</head>
+<body>
+<h1>Rellenar los campos solicitados:</h1>
+<form id="pharmacies" action="/pharmacies/getEmergencyPharmacies" method="post">
+    <p>
+        Comuna: <select id="communeList" name="communeList"></select>
+	</p>
+    <p>
+        Nombre de Local: <input type="text" name="localName">
+    </p>
+    <p>
+        <input type="submit" value="Buscar"/>
+    </p>
+    <input type="hidden" name="commune" id="commune" value=""/>
+</form>
+<form id="hiddenParam">
+	<input type="hidden" name="reg_id" id="reg_id" value="7"/>
+</form>
+</body>
+</html>
