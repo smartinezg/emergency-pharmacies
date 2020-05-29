@@ -2,13 +2,15 @@
 Farmacias de Turno
 
 	Se encuentra disponible un servicio Rest para la obtención de la data solicitada:
-		http://localhost:8080/emergencyPharmacies
+		POST: http://localhost:8080/emergencyPharmacies
 
 	El Json de request como ejemplo sería:
 		{
 			"commune": "PROVIDENCIA",
 			"localName": "CRUZ VERDE"
 		}
+		Content-Type	application/json
+		
 
 	Además se encuentra disponible un sitio WEB sencillo donde se puede evaluar el resultado del servicio:
 		http://localhost:8080/farmaciasTurno.html
