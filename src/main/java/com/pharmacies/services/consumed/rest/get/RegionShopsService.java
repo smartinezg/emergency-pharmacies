@@ -23,7 +23,6 @@ public class RegionShopsService {
 	private Config config;
 
 	public LocalesRegionRS[] getRegionShops(int regionId) {
-		System.out.println("Entrando getRegionShops");
 		String getUrl =	config.propertiesRegionShops().getEndpoint();
 		getUrl+="?"+config.propertiesRegionShops().getIdregion()+"="+regionId;
 		HttpResponse response = null;
@@ -33,12 +32,11 @@ public class RegionShopsService {
 		try (CloseableHttpClient client = HttpClientBuilder.create().build()) {
 			response = client.execute(getMethod);
 			String result = EntityUtils.toString(response.getEntity());
-			logger.info(result);
 			Gson gson = new Gson();
 			
 			localesRegionArray = gson.fromJson(result, LocalesRegionRS[].class);
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.error(e.getMessage());
 		}
 		
 		logger.info("getRegionShops Response: " + localesRegionArray);

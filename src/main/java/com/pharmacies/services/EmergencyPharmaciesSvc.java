@@ -23,15 +23,17 @@ public class EmergencyPharmaciesSvc {
 		LocalesRegionRS[] localesRegionArray = regionShopsService.getRegionShops(config.propertiesRegionShops().getIdregionvalue());
 		java.util.List<EmergencyPharmacyRSDTO> emergencyPharmacyList = new java.util.ArrayList<EmergencyPharmacyRSDTO>();
 		
-		for (LocalesRegionRS localesRegionRS : localesRegionArray) {
-			if (localesRegionRS.getComunaNombre().equalsIgnoreCase(emergencyPharmacyRQDTO.getCommune()) && localesRegionRS.getLocalNombre().equalsIgnoreCase(emergencyPharmacyRQDTO.getLocalName())) {
-				EmergencyPharmacyRSDTO emergencyPharmacyRSDTO = new EmergencyPharmacyRSDTO();
-				emergencyPharmacyRSDTO.setLocalNombre(localesRegionRS.getLocalNombre());
-				emergencyPharmacyRSDTO.setLocalDireccion(localesRegionRS.getLocalDireccion());
-				emergencyPharmacyRSDTO.setLocalTelefono(localesRegionRS.getLocalTelefono());
-				emergencyPharmacyRSDTO.setLocalLng(localesRegionRS.getLocalLng());
-				emergencyPharmacyRSDTO.setLocalLat(localesRegionRS.getLocalLat());
-				emergencyPharmacyList.add(emergencyPharmacyRSDTO);
+		if (emergencyPharmacyList != null) {
+			for (LocalesRegionRS localesRegionRS : localesRegionArray) {
+				if (localesRegionRS.getComunaNombre().equalsIgnoreCase(emergencyPharmacyRQDTO.getCommune()) && localesRegionRS.getLocalNombre().equalsIgnoreCase(emergencyPharmacyRQDTO.getLocalName())) {
+					EmergencyPharmacyRSDTO emergencyPharmacyRSDTO = new EmergencyPharmacyRSDTO();
+					emergencyPharmacyRSDTO.setLocalNombre(localesRegionRS.getLocalNombre());
+					emergencyPharmacyRSDTO.setLocalDireccion(localesRegionRS.getLocalDireccion());
+					emergencyPharmacyRSDTO.setLocalTelefono(localesRegionRS.getLocalTelefono());
+					emergencyPharmacyRSDTO.setLocalLng(localesRegionRS.getLocalLng());
+					emergencyPharmacyRSDTO.setLocalLat(localesRegionRS.getLocalLat());
+					emergencyPharmacyList.add(emergencyPharmacyRSDTO);
+				}
 			}
 		}
 		

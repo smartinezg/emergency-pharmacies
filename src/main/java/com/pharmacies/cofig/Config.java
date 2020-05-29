@@ -13,11 +13,5 @@ public class Config {
 	public RegionShopsConfig propertiesRegionShops() {
 		return new RegionShopsConfig();
 	}
-
-	@Bean
-	@ConfigurationProperties(prefix="communesperregion")
-	public CommunesPerRegionConfig propertiesCommunesPerRegion() {
-		return new CommunesPerRegionConfig();
-	}
 	
 }

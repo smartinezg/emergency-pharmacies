@@ -1,7 +1,5 @@
 package com.pharmacies.controllers;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -20,15 +18,12 @@ import com.pharmacies.services.EmergencyPharmaciesSvc;
 @RequestMapping("/pharmacies")
 public class WebController {
 
-	private static Logger logger = LogManager.getLogger(WebController.class);
-
 	@Autowired
 	EmergencyPharmaciesSvc emergencyPharmaciesSvc;
 	
 	@ResponseStatus(value=HttpStatus.OK)
 	@RequestMapping(value = "/getEmergencyPharmacies", method = {RequestMethod.GET,RequestMethod.POST})
     public @ResponseBody java.util.List<EmergencyPharmacyRSDTO> processForm(@ModelAttribute("commune") String commune, @ModelAttribute("localName") String localName, Model model) {
-		logger.info("processForm " + commune + " // " + localName);
 		EmergencyPharmacyRQDTO emergencyPharmacyRQDTO = new EmergencyPharmacyRQDTO();
 		emergencyPharmacyRQDTO.setCommune(commune);
 		emergencyPharmacyRQDTO.setLocalName(localName);
